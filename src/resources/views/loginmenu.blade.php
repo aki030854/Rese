@@ -14,9 +14,9 @@
  </header>
  <main>
  <ul>
-	<li><a class="active" href="#home">Home</a></li>
-	<li><a href="#registration">Registrat</a></li>
-	<li><a href="#login">Login</a></li>
+	<li><a class="active" href="/">Home</a></li>
+	<li><a href="register">Registrat</a></li>
+	<li><a href="login">Login</a></li>
  </ul>
      <script>
         function closePage() {

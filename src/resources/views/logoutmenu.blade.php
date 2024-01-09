@@ -16,9 +16,10 @@
  
  <main>
  <ul>
-	<li><a class="active" href="#home">Home</a></li>
-	<li><a href="#logout">Logout</a></li>
-	<li><a href="#mypage">Mypage</a></li>
+	<li><a class="active" href="/">Home</a></li>
+	<li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    Logout</a></li>
+	<li><a href="my_page">Mypage</a></li>
  </ul>
  <script>
         function closePage() {

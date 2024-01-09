@@ -9,117 +9,55 @@
  </head>
  <body>
 <header>
-    <img src="{{asset('storage/shop_logo.png')}}">
-    
-    
+    <div class="header">
+      <a href="{{ Auth::check() ? route('logoutmenu') : route('loginmenu') }}"><img src="{{ asset('storage/shop_logo.png') }}" alt="Logo"/></a>
+    <div>
+        <select id="areaSelect">
+            <option value="all" selected>All</option>
+            <option value="area1">東京都</option>
+            <option value="area2">大阪府</option>
+            <option value="area1">福岡県</option>
+        </select>
+    </div>
+    <div>
+        <select id="genreSelect">
+            <option value="all" selected>All</option>
+            <option value="genre1">居酒屋</option>
+            <option value="genre2">イタリアン</option>
+            <option value="genre2">寿司</option>
+            <option value="genre2">焼肉</option>
+            <option value="genre2">ラーメン</option>
+        </select>
+    </div>
+  <div>
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button onclick="search()">検索</button>
+    </div>
+  </div>
 </header>
- <div class="flex__item">
-  <div class="shop__card">
-    <div class="card__img">
-      <img src="img/card.jpg" alt="" />
+ <div class="container">
+      <div class="row">
+        @foreach($shops ?? [] as $shop)
+          <div class="col-md-4 mb-4">
+            <div class="shop__card">
+              <div class="image_path">
+                <img src="{{ $shop->image_path }}" alt="{{ $shop->name }}" />
+                  </div>
+                    <div class="shop__content">
+                      <h1 class="shop__name">{{ $shop->name }}</h1>
+                        <div class="tag">
+                          <p class="area__tag">#{{ $shop->area }}</p>
+                          <p class="genre__tag">#{{ $shop->genre }}</p>
+                        </div>
+                        <div class="card__cat">
+                          <a href="{{ route('shop.show', $shop->id) }}">詳しくみる</a>
+                        </div>
+                     </div>
+               </div>
+           </div>
+        @endforeach
     </div>
-    <div class="shop__content">
-      <h1 class="shop__ttl">仙人</h1>
-      <div class="tag">
-        <p class="area__tag">#東京都</p>
-        <p class="genre__tag">#寿司</p>
-      </div>
-      <div class="card__cat">詳しくみる</div>
-    </div>
-  </div>
-  <div class="practice__card">
-    <div class="card__img">
-      <img src="img/card.jpg" alt="" />
-    </div>
-    <div class="card__content">
-      <h1 class="card__ttl">牛助</h1>
-      <div class="tag">
-        <p class="card__tag">#大阪府</p>
-        <p class="card__tag">#焼肉</p>
-      </div>
-      <div class="card__cat">詳しくみる</div>
-    </div>
-  </div>
-  <div class="practice__card">
-    <div class="card__img">
-      <img src="img/card.jpg" alt="" />
-    </div>
-    <div class="card__content">
-      <h1 class="card__ttl">戦慄</h1>
-      <div class="tag">
-        <p class="card__tag">#福岡県</p>
-        <p class="card__tag">#居酒屋</p>
-      </div>
-      <div class="card__cat">詳しくみる</div>
-    </div>
-  </div>
-  <div class="practice__card">
-    <div class="card__img">
-      <img src="img/card.jpg" alt="" />
-    </div>
-    <div class="card__content">
-      <h1 class="card__ttl">ルーク</h1>
-      <div class="tag">
-        <p class="card__tag">#東京都</p>
-        <p class="card__tag">#イタリアン</p>
-      </div>
-      <div class="card__cat">詳しくみる</div>
-    </div>
-  </div>
 </div>
-<div class="flex__item">
-  <div class="practice__card">
-    <div class="card__img">
-      <img src="img/card.jpg" alt="" />
-    </div>
-    <div class="card__content">
-      <h1 class="card__ttl">志摩屋</h1>
-      <div class="tag">
-        <p class="card__tag">#福岡県</p>
-        <p class="card__tag">#ラーメン</p>
-      </div>
-      <div class="card__cat">詳しくみる</div>
-    </div>
-  </div>
-  <div class="practice__card">
-    <div class="card__img">
-      <img src="img/card.jpg" alt="" />
-    </div>
-    <div class="card__content">
-      <h1 class="card__ttl">香</h1>
-      <div class="tag">
-        <p class="card__tag">#東京都</p>
-        <p class="card__tag">#焼肉</p>
-      </div>
-      <div class="card__cat">詳しくみる</div>
-    </div>
-  </div>
-  <div class="practice__card">
-    <div class="card__img">
-      <img src="img/card.jpg" alt="" />
-    </div>
-    <div class="card__content">
-      <h1 class="card__ttl">JJ</h1>
-      <div class="tag">
-        <p class="card__tag">#大阪府</p>
-        <p class="card__tag">#イタリアン</p>
-      </div>
-      <div class="card__cat">詳しくみる</div>
-    </div>
-  </div>
-  <div class="practice__card">
-    <div class="card__img">
-      <img src="img/card.jpg" alt="" />
-    </div>
-    <div class="card__content">
-      <h1 class="card__ttl">らーめん極み</h1>
-      <div class="tag">
-        <p class="card__tag">#東京都</p>
-        <p class="card__tag">#ラーメン</p>
-      </div>
-      <div class="card__cat">詳しくみる</div>
-    </div>
-  </div>
-</div>
+ <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html> 

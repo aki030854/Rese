@@ -9,10 +9,7 @@
      <link rel="stylesheet" href="{{ asset('css/register.css') }}" />
  </head>
 <body>
-<header>
-<h1>Atte</h1>
-</header>
-<main>
+
  
  @if ($errors->any())
   <div>
@@ -35,21 +32,7 @@
         <button type="submit">登録</button>
       </form>
 </div>
-<p>ログインは<a href="login">こちら</a></p>
 </main>
+
 </body>
-</body>
-<footer>
-<small>Atte,ict.</small>
-</footer>
 </html>
-</html>
-<div class="log-form">
-  <h2>Login to your account</h2>
-  <form>
-    <input type="text" title="username" placeholder="username" />
-    <input type="password" title="username" placeholder="password" />
-    <button type="submit" class="btn">Login</button>
-    <a class="forgot" href="#">Forgot Username?</a>
-  </form>
-</div><!--end log fo
