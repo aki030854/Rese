@@ -15,7 +15,7 @@
  <main>
  <ul>
 	<li><a class="active" href="/">Home</a></li>
-	<li><a href="register">Registrat</a></li>
+	<li><a href="{{ route('register') }}">Registrat</a></li>
 	<li><a href="login">Login</a></li>
  </ul>
      <script>

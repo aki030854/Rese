@@ -18,10 +18,20 @@
         <textarea name="description" required></textarea>
 
         <label for="area">エリア:</label>
-        <input type="text" name="area" required>
+<select name="area">
+    <option value="" selected disabled>エリアを選択</option>
+    @foreach ($areas as $area)
+        <option value="{{ $areas->id }}">{{ $areas->area }}</option>
+    @endforeach
+</select>
 
-        <label for="genre">ジャンル:</label>
-        <input type="text" name="genre" required>
+<label for="genre">ジャンル:</label>
+<select name="genre">
+    <option value="" selected disabled>ジャンルを選択</option>
+    @foreach ($genres as $genre)
+        <option value="{{ $genres->id }}">{{ $genres->genre }}</option>
+    @endforeach
+</select>
 
         <label for="image_path">画像パス:</label>
         <input type="file" name="image_path" accept="image/*" required>

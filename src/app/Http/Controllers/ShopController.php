@@ -2,51 +2,54 @@
 
 namespace App\Http\Controllers;
 use App\Models\Shop;
+use App\Models\Area;
+use App\Models\Genre;
 use Illuminate\Http\Request;
+
+
 
 class ShopController extends Controller
 {
-public function showRegisterForm()
+        
+    public function showRegisterForm()
     {
         return view('shop-register');
     }
 
-    public function register(Request $request)
+     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'area' => 'required|string',
-            'genre' => 'required|string',
-            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'name' => 'required',
+            'description' => 'required',
+            'area_id' => 'required', 
+            'genre_id' => 'required', 
+            'image_path' => 'required|image',
         ]);
+        
+        return view('shop-register', compact('areas', 'genres'));
 
-        $imagePath = $request->file('image_path')->store('shop_images', 'public');
+        $areas = Area::all();
+        
+        $genres = Genre::all();
 
-        Shop::create([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'area' => $request->input('area'),
-            'genre' => $request->input('genre'),
-            'image_path' => $imagePath,
-        ]);
 
-        return redirect()->route('home')->with('success', '店舗が登録されました！');
+        $shop = new Shop();
+        $shop->name = $request->input('name');
+        $shop->description = $request->input('description');
+        $shop->area_id = $request->input('area_id');
+        $shop->genre_id = $request->input('genre_id');
+
+        // 画像のアップロード処理
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('images', 'public');
+            $shop->image_path = $imagePath;
+        }
+
+        
+
+        $shop->save();
+
+        // リダイレクトや他の処理を追加
+        return redirect()->route('index');
     }
-
-
-     public function index(Request $request)
-    {
-        $area = $request->input('area', 'All');
-        $genre = $request->input('genre', 'All');
-        $keyword = $request->input('keyword', '');
-        
-        $shops = Shop::where('area', $area)
-                      ->where('genre', $genre)
-                      ->where('name', 'like', '%' . $keyword . '%')
-                      ->get();
-        
-        return view('index', compact('shops'));
-        
-}
 }

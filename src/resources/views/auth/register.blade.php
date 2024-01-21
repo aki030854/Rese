@@ -9,7 +9,9 @@
      <link rel="stylesheet" href="{{ asset('css/register.css') }}" />
  </head>
 <body>
-
+<header>
+<a href="{{ Auth::check() ? route('logoutmenu') : route('loginmenu') }}"><img src="{{ asset('storage/shop_logo.png') }}" alt="Logo"/></a>
+ </header>
  
  @if ($errors->any())
   <div>
