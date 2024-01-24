@@ -51,4 +51,5 @@ Route::get('/logoutmenu', function () {
 })->name('logoutmenu')->middleware('auth');
 
 Route::get('/shop-register', [ShopController::class, 'showRegisterForm'])->name('shop.register.form');
-Route::post('/shop-register', [ShopController::class, 'register'])->name('shop.register');
+Route::post('/shop-register', [ShopController::class, 'store'])->name('shop.register');
+Route::get('/shops/search', [ShopController::class, 'search'])->name('shops.search');

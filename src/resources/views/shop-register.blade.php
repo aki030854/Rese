@@ -17,19 +17,19 @@
         <label for="description">店舗説明:</label>
         <textarea name="description" required></textarea>
 
-        <label for="area">エリア:</label>
-<select name="area">
+       <label for="area">エリア:</label>
+<select name="area_id">
     <option value="" selected disabled>エリアを選択</option>
     @foreach ($areas as $area)
-        <option value="{{ $areas->id }}">{{ $areas->area }}</option>
+        <option value="{{ $area->id }}">{{ $area->area }}</option>
     @endforeach
 </select>
 
 <label for="genre">ジャンル:</label>
-<select name="genre">
+<select name="genre_id">
     <option value="" selected disabled>ジャンルを選択</option>
     @foreach ($genres as $genre)
-        <option value="{{ $genres->id }}">{{ $genres->genre }}</option>
+        <option value="{{ $genre->id }}">{{ $genre->genre }}</option>
     @endforeach
 </select>
 

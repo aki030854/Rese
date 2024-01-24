@@ -9,32 +9,37 @@
  </head>
  <body>
 <header>
-    <div class="header">
+  <div class="header">
       <a href="{{ Auth::check() ? route('logoutmenu') : route('loginmenu') }}"><img src="{{ asset('storage/shop_logo.png') }}" alt="Logo"/></a>
-    <div>
-        <select id="areaSelect">
-            <option value="all" selected>All</option>
-            <option value="area1">東京都</option>
-            <option value="area2">大阪府</option>
-            <option value="area1">福岡県</option>
-        </select>
+
+    <form class="search-form" action="{{ route('shops.search') }}" method="get">
+            @csrf
+            <div class="search-form__item">
+                <select class="search-form__item-select" name="area">
+                    <option value="all" selected>All</option>
+                    @foreach ($areas as $area)
+                        <option value="{{ $area->area }}">{{ $area->area }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="search-form__item">
+                <select class="search-form__item-select" name="genre">
+                    <option value="all" selected>All</option>
+                    @foreach ($genres as $genre)
+                        <option value="{{ $genre->genre }}">{{ $genre->genre }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div>
+                <input type="text" id="searchInput" name="keyword" placeholder="Search...">
+                <button type="submit">検索</button>
+            </div>
+        </form>
     </div>
-    <div>
-        <select id="genreSelect">
-            <option value="all" selected>All</option>
-            <option value="genre1">居酒屋</option>
-            <option value="genre2">イタリアン</option>
-            <option value="genre2">寿司</option>
-            <option value="genre2">焼肉</option>
-            <option value="genre2">ラーメン</option>
-        </select>
-    </div>
-  <div>
-        <input type="text" id="searchInput" placeholder="Search...">
-        <button onclick="search()">検索</button>
-    </div>
-  </div>
 </header>
+
  <div class="container">
       <div class="row">
         @foreach($shops ?? [] as $shop)
@@ -57,7 +62,6 @@
            </div>
         @endforeach
     </div>
-</div>
- <script src="{{ asset('js/app.js') }}"></script>
+ </div>
 </body>
 </html> 

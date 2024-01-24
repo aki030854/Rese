@@ -21,4 +21,18 @@ class Shop extends Model
     {
         return $this->belongsTo(Genre::class);
     }
+
+   public function scopeSearch($query, $area, $genre, $keyword)
+    {
+        return $query
+            ->when($area !== 'all', function ($query) use ($area) {
+                return $query->where('area', $area);
+            })
+            ->when($genre !== 'all', function ($query) use ($genre) {
+                return $query->where('genre', $genre);
+            })
+            ->when($keyword !== '', function ($query) use ($keyword) {
+                return $query->where('name', 'like', '%' . $keyword . '%');
+            });
+    }
 }

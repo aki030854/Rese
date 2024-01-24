@@ -13,7 +13,14 @@ class ShopController extends Controller
         
     public function showRegisterForm()
     {
-        return view('shop-register');
+
+        $areas = Area::all();
+        
+        $genres = Genre::all();
+        
+        return view('shop-register', compact('areas', 'genres'));
+
+
     }
 
      public function store(Request $request)
@@ -26,12 +33,9 @@ class ShopController extends Controller
             'image_path' => 'required|image',
         ]);
         
-        return view('shop-register', compact('areas', 'genres'));
 
-        $areas = Area::all();
+
         
-        $genres = Genre::all();
-
 
         $shop = new Shop();
         $shop->name = $request->input('name');
@@ -45,11 +49,23 @@ class ShopController extends Controller
             $shop->image_path = $imagePath;
         }
 
-        
-
-        $shop->save();
+         $shop->save();
 
         // リダイレクトや他の処理を追加
-        return redirect()->route('index');
+         return redirect()->route('shop.register.form');
     }
+
+    public function index(Request $request)
+    {
+     $area = $request->input('area', 'all');
+    $genre = $request->input('genre', 'all');
+    $keyword = $request->input('keyword', '');
+
+    $shops = Shop::search($area, $genre, $keyword)->get();
+    $areas = Area::all();
+    dd($areas);
+    $genres = Genre::all();
+
+    return view('index', compact('shops', 'areas', 'genres'));
+}
 }
