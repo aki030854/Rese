@@ -12,17 +12,20 @@ class CreateShopsTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('shops', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->foreignId('area_id')->constrained(); 
-            $table->foreignId('genre_id')->constrained(); 
-            $table->string('image_path');
-            $table->timestamps();
-        });
-    }
+{
+    Schema::create('shops', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->text('description');
+        $table->unsignedBigInteger('area_id');
+        $table->unsignedBigInteger('genre_id');
+        $table->string('image_path');
+        $table->timestamps();
+
+        $table->foreign('area_id')->references('id')->on('areas');
+        $table->foreign('genre_id')->references('id')->on('genres');
+    });
+}
 
     /**
      * Reverse the migrations.

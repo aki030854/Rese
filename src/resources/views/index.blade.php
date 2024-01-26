@@ -42,7 +42,7 @@
 
  <div class="container">
       <div class="row">
-        @foreach($shops ?? [] as $shop)
+        @foreach($shops as $shop)
           <div class="col-md-4 mb-4">
             <div class="shop__card">
               <div class="image_path">
@@ -51,8 +51,8 @@
                     <div class="shop__content">
                       <h1 class="shop__name">{{ $shop->name }}</h1>
                         <div class="tag">
-                          <p class="area__tag">#{{ $shop->area }}</p>
-                          <p class="genre__tag">#{{ $shop->genre }}</p>
+                          <p class="area__tag">#{{ $shop->area->name }}</p>
+                            <p class="genre__tag">#{{ $shop->genre->name }}</p>
                         </div>
                         <div class="card__cat">
                           <a href="{{ route('shop.show', $shop->id) }}">詳しくみる</a>

@@ -56,16 +56,15 @@ class ShopController extends Controller
     }
 
     public function index(Request $request)
-    {
-     $area = $request->input('area', 'all');
+{
+    $area = $request->input('area', 'all');
     $genre = $request->input('genre', 'all');
     $keyword = $request->input('keyword', '');
 
-    $shops = Shop::search($area, $genre, $keyword)->get();
-    $areas = Area::all();
-    dd($areas);
-    $genres = Genre::all();
+    $shops = Shop::search($area, $genre, $keyword)
+        ->with('area', 'genre') // リレーションを追加
+        ->get();
 
-    return view('index', compact('shops', 'areas', 'genres'));
+    return view('index', compact('shops'));
 }
 }
